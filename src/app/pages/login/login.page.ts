@@ -3,6 +3,8 @@ import { MenuController, NavController, Events } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertModule } from '../../Module/alert/alert.module';
 import { LoaderModule } from '../../Module/loader/loader.module';
+import { BasicService } from 'src/app/service/Basic/basic.service';
+import { HTTP } from '@ionic-native/http/ngx';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,9 @@ export class LoginPage {
     public alertModule: AlertModule,
     public navCtrl: NavController,
     public loader: LoaderModule,
-    public events: Events
+    public events: Events,
+    public bs: BasicService,
+    public http: HTTP
   ) {
     this.menuCtrl.enable(false);
     this.loginForm = this.formBuilder.group({
@@ -31,26 +35,20 @@ export class LoginPage {
   }
 
   loginformSubmit(val: any) {
-    // if (val.value.remember === true || val.value.remember === 'true') {
-    //   localStorage.setItem('isRemember', 'true');
-    // } else {
-    //   localStorage.setItem('isRemember', 'false');
-    // }
-    // if (localStorage.storeUserData === undefined) {
-    //   this.alertModule.openAlert('Ekda', 'Please Register contact number', 'Ok');
-    // } else {
-    //   const data = JSON.parse(localStorage.storeUserData);
-    //   let filterData = data.filter(item => item.phoneNumber == val.value.phone);
-    //   if (filterData.length === 0) {
-    //     this.alertModule.openAlert('Ekda', 'Please Register contact number', 'Ok');
-    //   } else {
-    //     localStorage.isLogin = true;
-    //     localStorage.userLoginDetails = JSON.stringify(val.value);
-    //     localStorage.removeItem('phoneNo');
-    //     this.navCtrl.navigateRoot(['my-calendar']);
-    //   }
-    // }
-    localStorage.phoneNo = val.value.phone;
-    this.navCtrl.navigateForward('check-otp');
+    const data = {
+      phone_no: this.loginForm.value.phone
+    };
+    this.bs.hitApi(
+      'register',
+      data,
+      'POST',
+      true)
+      .then((receivedData: any) => {
+        console.log('Received Data using HttpClient => ', receivedData);
+        if (receivedData.status) {
+          this.bs.setUserData(receivedData);
+          this.navCtrl.navigateForward('check-otp');
+        }
+      });
   }
 }

@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertModule } from '../../Module/alert/alert.module';
+import { BasicService } from 'src/app/service/Basic/basic.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -30,7 +31,8 @@ export class ProfilePage {
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertModule,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public bs: BasicService
   ) {
     this.profileForm = this.formBuilder.group({
       profileId: '',
@@ -166,7 +168,20 @@ export class ProfilePage {
       }];
       localStorage.setItem('storeUserData', JSON.stringify(storeData));
       this.alert.showToast('Your profile update successfully.', 'top', 5000);
-      this.router.navigate(['my-calendar']);
+      const data = {
+        user_id: this.bs.userId,
+      }
+      this.bs.hitApi(
+        'user/update-profile',
+        data,
+        'POST',
+        true
+      ).then((receivedData: any) => {
+        if (receivedData.status) {
+          this.router.navigate(['my-calendar']);
+
+        }
+      });
     } else {
       localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
     }

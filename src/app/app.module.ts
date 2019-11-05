@@ -14,11 +14,14 @@ import { Contacts } from '@ionic-native/contacts/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HTTP } from '@ionic-native/http/ngx';
+
 /** Modules */
 import { AlertModule } from './Module/alert/alert.module';
 import { LoaderModule } from './Module/loader/loader.module';
 import { ActionSheetModule } from './Module/action-sheet/action-sheet.module';
-import { HttpClientModule } from 'node_modules/@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 /** Pipes */
 import { PipesModule } from './pipes/pipes.module';
@@ -37,6 +40,7 @@ import { PipesModule } from './pipes/pipes.module';
     HttpClientModule,
     AngularMultiSelectModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     AppRoutingModule,
     PipesModule
   ],
@@ -48,6 +52,7 @@ import { PipesModule } from './pipes/pipes.module';
     Crop,
     Contacts,
     Base64,
+    HTTP,
     // Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
