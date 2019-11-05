@@ -1,0 +1,43 @@
+<ion-header mode="ios">
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Contact Listing</ion-title>
+        <ion-buttons slot="end">
+            <ion-button fill=clear (click)="filterPage()">
+                <ion-icon name="funnel"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="greyBg">
+    <ion-item>
+        <ion-input [(ngModel)]="searchKey" type="text" id="search"
+            placeholder="Search By Name"
+            (keyup.enter)="searchProduct(searchKey)">
+        </ion-input>
+        <ion-icon (click)="searchProduct(searchKey)" class="icon-style"
+            slot="end" color="primary" name="search">
+        </ion-icon>
+        <ion-icon *ngIf="searchKey !== ''" (click)="closeSearch()" class="icon-style" slot="end"
+            color="primary" name="close">
+        </ion-icon>
+    </ion-item>
+    <ion-list>
+        <ion-card *ngFor="let list of userData">
+            <ion-item lines=none (click)="profile(list)">
+                <ion-avatar slot="start">
+                    <img [src]="list.profileId" />
+                </ion-avatar>
+                <ion-label>
+                    <h2 class="fc-blue">{{list.fname}} {{list.mname}}
+                        {{list.lname}}</h2>
+                    <h3 class="fc-black">{{list.address}}</h3>
+                    <p>{{list.cno}}</p>
+                </ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+</ion-content>

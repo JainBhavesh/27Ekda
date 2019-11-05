@@ -1,0 +1,50 @@
+<!-- <ion-header mode="ios">
+    <ion-toolbar mode="ios">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+<ion-content padding>
+    <div text-center margin-top>
+        <img src="../../../../assets/icon/logo.png" alt="Logo" width="150"
+            height=150 />
+    </div>
+
+    <div class="form">
+        <form [formGroup]="signupForm"
+            (ngSubmit)="signupFormSubmit(signupForm)">
+            <ion-item no-padding lines="none">
+                <ion-label position="floating" color=dark>Enter Phone No
+                    <ion-text color="danger">*</ion-text>
+                </ion-label>
+                <ion-input
+                    type="number"
+                    name="phone"
+                    formControlName="phone">
+                </ion-input>
+            </ion-item>
+            <div margin-top margin-left
+                *ngIf="!signupForm.controls.phone.valid
+                &&(signupForm.controls.phone.dirty
+                ||signupForm.controls.phone.touched)">
+                <div
+                    *ngIf="signupForm.controls['phone'].errors['required']">
+                    <ion-text color="danger">Phone Number is required.</ion-text>
+                </div>
+                <div
+                    *ngIf="signupForm.controls['phone'].errors['pattern']">
+                    <ion-text color="danger">Enter Proper number.</ion-text>
+                </div>
+            </div>
+
+            <ion-button margin-top type="submit" class="btn" expand="block"
+                [disabled]="!signupForm.valid">
+                <ion-ripple-effect></ion-ripple-effect>
+                Register
+            </ion-button>
+        </form>
+    </div>
+
+</ion-content>
