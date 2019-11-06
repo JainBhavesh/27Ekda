@@ -5,11 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './feedback.page.html',
   styleUrls: ['./feedback.page.scss'],
 })
-export class FeedbackPage implements OnInit {
+export class FeedbackPage {
 
-  constructor() { }
-
-  ngOnInit() {
+  name: any = '';
+  mobileNo: any = '';
+  feedback: any = '';
+  constructor() {
+    this.name = 'Bhavesh';
+    this.mobileNo = '8690111115';
   }
 
+  submit() {
+    console.log('name => ', this.name, '<= mobile no => ', this.mobileNo, '<= Feedback => ', this.feedback);
+  }
 }

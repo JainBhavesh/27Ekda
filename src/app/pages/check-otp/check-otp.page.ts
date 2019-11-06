@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as $ from 'jquery';
 import { NavController } from '@ionic/angular';
 import { AlertModule } from '../../Module/alert/alert.module';
-import { NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 import { BasicService } from 'src/app/service/Basic/basic.service';
 @Component({
   selector: 'app-check-otp',
@@ -12,16 +12,25 @@ import { BasicService } from 'src/app/service/Basic/basic.service';
 export class CheckOtpPage {
   public otpArr: any = [];
   public otp: number;
+  mobileNo: any;
+  userExist: any;
   constructor(
     public router: Router,
     public navCtrl: NavController,
     public alert: AlertModule,
-    public bs: BasicService
+    public bs: BasicService,
+    public activated: ActivatedRoute
   ) {
+    this.activated.queryParams.subscribe(data => {
+      this.otp = data.otp;
+      this.mobileNo = data.phone_no;
+      this.userExist = data.is_user_exist;
+    });
+    this.bs.getDeviceType();
   }
 
   ionViewWillEnter() {
-    this.otp = 1234;
+    // this.otp = 1234;
   }
 
   otpFormSubmit() {
@@ -34,7 +43,8 @@ export class CheckOtpPage {
       const inputOTP = self.otpArr.toString().replace(/,/g, '');
       if (inputOTP == self.otp) {
         const data = {
-          otp: self.otp,
+          is_user_exist: this.userExist,
+          phone_no: this.mobileNo,
           device_type: this.bs.deviceType,
           device_token: this.bs.deviceToken
         }
@@ -45,11 +55,16 @@ export class CheckOtpPage {
           true
         ).then((receivedData: any) => {
           if (receivedData.status) {
-            self.navCtrl.navigateRoot('profile', {
-              queryParams: {
-                cno: { cno: localStorage.phoneNo }
-              }
-            });
+            this.bs.setUserData(receivedData.data);
+            if (this.userExist == true) {
+              self.navCtrl.navigateRoot('my-calendar');
+            } else {
+              self.navCtrl.navigateRoot('profile', {
+                queryParams: {
+                  cno: { cno: localStorage.phoneNo }
+                }
+              });
+            }
           }
         });
       } else {

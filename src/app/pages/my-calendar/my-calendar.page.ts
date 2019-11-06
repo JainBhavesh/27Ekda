@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController, NavController } from '@ionic/angular';
+import { BasicService } from 'src/app/service/Basic/basic.service';
 @Component({
   selector: 'app-my-calendar',
   templateUrl: './my-calendar.page.html',
@@ -72,9 +73,26 @@ export class MyCalendarPage {
   ];
   constructor(
     public menuCtrl: MenuController,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    public bs: BasicService
   ) {
     this.menuCtrl.enable(true);
+  }
+
+  getUserList() {
+    const data = {
+      user_id: this.bs.userId
+    }
+    this.bs.hitApi(
+      'user/user-list',
+      data,
+      'POST',
+      true)
+      .then((receivedData: any) => {
+        this.userData = receivedData.data.user_list;
+      }).catch(e => {
+        console.log('Error in userList => ', e);
+      });
   }
 
   ionViewWillEnter() {

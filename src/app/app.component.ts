@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-
-import { Platform, Events, NavController } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
-import { FirebaseCRUDService } from './service/curd/firebase-crud.service';
 import { Router } from '@angular/router';
 import { AlertModule } from './Module/alert/alert.module';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import { BasicService } from './service/Basic/basic.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +38,9 @@ export class AppComponent {
     private statusBar: StatusBar,
     public router: Router,
     public alertModule: AlertModule,
-    public navCtrl: NavController
+    public navCtrl: NavController,
+    private push: Push,
+    public bs: BasicService
   ) {
     this.initializeApp();
     if (localStorage.phoneNo !== undefined) {
@@ -55,6 +55,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.handleHardwareBackButton();
+      this.pushNotifictions();
     });
   }
 
@@ -84,5 +85,51 @@ export class AppComponent {
 
   logout() {
     localStorage.setItem('isLogin', 'false');
+  }
+
+  pushNotifictions() {
+    const options: PushOptions = {
+      "android": {
+        "senderID": "690486240690"
+      },
+      "browser": {},
+      "ios": {
+        "sound": true,
+        "badge": true
+      },
+      "windows": {},
+
+    };
+
+    const pushObject: PushObject = this.push.init(options);
+
+    pushObject.on('registration').subscribe((data: any) => {
+
+      console.log('Device registered' + data);
+      console.log('Device registrationId ' + data.registrationId);
+
+      this.bs.deviceToken = data.registrationId;
+    });
+
+    pushObject.on('notification').subscribe((data: any) => {
+      console.log('Received a notification ' + JSON.stringify(data));
+      var extraData = JSON.parse(JSON.stringify(data.additionalData));
+      if (data.additionalData.foreground) {
+        // if application open
+        console.log('in foreground');
+
+      } else {
+        // In background
+        // setTimeout(() => {
+        //   this.navCtrl.navigateForward('');
+        // }, 2000);
+      }
+    });
+
+
+    pushObject.on('error').subscribe(error => {
+      console.error('Error with Push plugin' + JSON.stringify(error));
+    });
+
   }
 }

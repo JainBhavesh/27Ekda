@@ -166,8 +166,7 @@ export class ProfilePage {
         phoneNumber: this.phno,
         userDetails: val.value
       }];
-      localStorage.setItem('storeUserData', JSON.stringify(storeData));
-      this.alert.showToast('Your profile update successfully.', 'top', 5000);
+      // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const data = {
         user_id: this.bs.userId,
       }
@@ -178,8 +177,8 @@ export class ProfilePage {
         true
       ).then((receivedData: any) => {
         if (receivedData.status) {
-          this.router.navigate(['my-calendar']);
-
+          this.bs.setUserData(receivedData.data);
+          this.navCtrl.navigateRoot('my-calendar');
         }
       });
     } else {

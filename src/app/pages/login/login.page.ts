@@ -44,10 +44,12 @@ export class LoginPage {
       'POST',
       true)
       .then((receivedData: any) => {
-        console.log('Received Data using HttpClient => ', receivedData);
         if (receivedData.status) {
-          this.bs.setUserData(receivedData);
-          this.navCtrl.navigateForward('check-otp');
+          this.navCtrl.navigateForward('check-otp', {
+            queryParams: {
+              data: receivedData.data
+            }
+          });
         }
       });
   }

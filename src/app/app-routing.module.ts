@@ -11,30 +11,12 @@ const routes: Routes = [
     loadChildren: './pages/check-otp/check-otp.module#CheckOtpPageModule'
   },
   {
-    path: 'forgot-password',
-    loadChildren:
-      './pages/forgot-password/forgot-password.module#ForgotPasswordPageModule'
-  },
-  {
-    path: 'change-password',
-    loadChildren:
-      './pages/change-password/change-password.module#ChangePasswordPageModule'
-  },
-  {
     path: 'profile',
     loadChildren: './pages/Profile/profile.module#ProfilePageModule',
   },
   {
-    path: 'contact',
-    loadChildren: './pages/contact/contact.module#ContactPageModule',
-  },
-  {
     path: 'my-calendar',
     loadChildren: './pages/my-calendar/my-calendar.module#MyCalendarPageModule',
-  },
-  {
-    path: 'history',
-    loadChildren: './pages/history/history.module#HistoryPageModule',
   },
   {
     path: 'donors',
@@ -49,13 +31,22 @@ const routes: Routes = [
     loadChildren: './pages/feedback/feedback.module#FeedbackPageModule'
   },
   {
-    path: 'news',
-    loadChildren: './pages/news/news.module#NewsPageModule'
-  },
-  {
     path: 'contact-profile',
     loadChildren: './pages/contact-profile/contact-profile.module#ContactProfilePageModule'
+  },
+  {
+    path: 'feedback',
+    loadChildren: './pages/feedback/feedback.module#FeedbackPageModule'
+  },
+  {
+    path: 'news-list',
+    loadChildren: './pages/news-list/news-list.module#NewsListPageModule'
+  },
+  {
+    path: 'news-list-detail-page',
+    loadChildren: './pages/news-list-detail-page/news-list-detail-page.module#NewsListDetailPagePageModule'
   }
+
 
 ];
 

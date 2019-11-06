@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ToastController, Platform } from '@ionic/angular';
 import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 import * as $ from 'jquery';
@@ -17,12 +17,27 @@ export class BasicService {
   deviceToken: any = '';
   deviceType: any = '';
   userId: any = '';
+
+  // userData
+  mobileNo: any;
+  firstName: any;
+  lastName: any;
+  middleName: any;
+  dob: any;
+  address: any;
+  city: any;
+  state: any;
+  pincode: any;
+  county: any = 'India';
+  email: any;
+  profilePic: any;
   constructor(
     public http: HTTP,
     public h: HttpClient,
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
-    public storage: Storage
+    public storage: Storage,
+    public platform: Platform
   ) {
 
   }
@@ -36,14 +51,26 @@ export class BasicService {
       params,
       { Auth: this.token }
     ).then(receivedData => {
-      console.log('Received Data => ', receivedData);
       this.DismissLoader();
       return JSON.parse(receivedData.data);
     }).catch(error => {
-      console.log('Error in Api => ', error);
+      console.log('Error in plugin => ', error);
       this.DismissLoader();
       this.errorCall(error);
     });
+
+
+    // this.h.post(this.baseUrl + api, params, {}).subscribe(data => {
+    //   console.log('Data => ', data);
+    // })
+  }
+
+  getDeviceType() {
+    if (this.platform.is('android')) {
+      this.deviceType = 'Android'
+    } else {
+      this.deviceType = 'Ios'
+    }
   }
 
   errorCall(error) {
@@ -82,10 +109,38 @@ export class BasicService {
   }
 
   setUserData(data) {
+    console.log('Received Data => ', data);
     this.storage.set('userData', data);
+    this.mobileNo = data.phone_no;
+    this.firstName = data.first_name;
+    this.middleName = data.middle_name;
+    this.lastName = data.last_name;
+    this.email = data.email;
+    this.address = data.address;
+    this.dob = data.dob;
+    this.token = data.access_token;
+    this.city = data.city;
+    this.state = data.state;
+    this.county = data.county;
+    this.pincode = data.pin_code;
+    this.profilePic = data.profile_pic;
   }
 
-  getUserData(data) {
-    return this.storage.get('userData');
+  async getUserData() {
+    return await this.storage.get('userData').then(data => {
+      this.mobileNo = data.phone_no;
+      this.firstName = data.first_name;
+      this.middleName = data.middle_name;
+      this.lastName = data.last_name;
+      this.email = data.email;
+      this.address = data.address;
+      this.dob = data.dob;
+      this.token = data.access_token;
+      this.city = data.city;
+      this.state = data.state;
+      this.county = data.county;
+      this.pincode = data.pin_code;
+      this.profilePic = data.profile_pic;
+    });
   }
 }

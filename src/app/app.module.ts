@@ -15,6 +15,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP } from '@ionic-native/http/ngx';
+import { Push } from '@ionic-native/push/ngx';
 
 /** Modules */
 import { AlertModule } from './Module/alert/alert.module';
@@ -53,7 +54,7 @@ import { PipesModule } from './pipes/pipes.module';
     Contacts,
     Base64,
     HTTP,
-    // Push,
+    Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
