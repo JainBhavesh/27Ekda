@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { MenuController, NavController, Events } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertModule } from '../../Module/alert/alert.module';
-import { LoaderModule } from '../../Module/loader/loader.module';
 import { BasicService } from 'src/app/service/Basic/basic.service';
-import { HTTP } from '@ionic-native/http/ngx';
-
+import { Router, NavigationExtras } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -20,10 +18,8 @@ export class LoginPage {
     public formBuilder: FormBuilder,
     public alertModule: AlertModule,
     public navCtrl: NavController,
-    public loader: LoaderModule,
-    public events: Events,
     public bs: BasicService,
-    public http: HTTP
+    public router: Router
   ) {
     this.menuCtrl.enable(false);
     this.loginForm = this.formBuilder.group({
@@ -34,19 +30,30 @@ export class LoginPage {
   ionViewWillEnter() {
   }
 
-  loginformSubmit(val: any) {
-    const data = {
-      phone_no: this.loginForm.value.phone
-    };
-    this.bs.hitApi('post','register',data).subscribe((receivedData: any) => {
-        // if (receivedData.status) {
-        //   this.navCtrl.navigateForward('check-otp', {
-        //     queryParams: {
-        //       data: receivedData.data
-        //     }
-        //   });
-        // }
-        console.log(receivedData);
+  loginformSubmit() {
+    try {
+      const data = {
+        phone_no: this.loginForm.value.phone
+      };
+      this.bs.showLoader();
+      this.bs.hitApi('post', 'register', data).subscribe((receivedData: any) => {
+        this.bs.DismissLoader();
+        if (receivedData.status) {
+          const navigationExtras: NavigationExtras = {
+            state: {
+              user: receivedData.data
+            }
+          };
+          this.router.navigate(['check-otp'], navigationExtras);
+        } else {
+          if (receivedData.data.is_user_exist) {
+            this.navCtrl.navigateRoot(['my-calendar']);
+          }
+        }
       });
+    } catch (error) {
+      console.log(error);
+      this.bs.DismissLoader();
+    }
   }
 }

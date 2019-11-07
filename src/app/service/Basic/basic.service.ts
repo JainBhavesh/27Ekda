@@ -42,7 +42,7 @@ export class BasicService {
 
   }
 
-  hitApi(method:string,api: string, params: {}) {
+  hitApi(method: string, api: string, params: {}) {
     // await this.http.post(
     //   this.baseUrl + api,
     //   params,
@@ -57,11 +57,11 @@ export class BasicService {
     // });
 
     if (method == 'get') {
-      return this.h.get(this.baseUrl + api,{headers: { Auth: this.token }});
+      return this.h.get(this.baseUrl + api, { headers: { Auth: this.token } });
     } else if (method == 'post') {
-      return this.h.post(this.baseUrl + api, params,{headers: { Auth: this.token }});
+      return this.h.post(this.baseUrl + api, params, { headers: { Auth: this.token } });
     } else if (method == 'delete') {
-      return this.h.delete(this.baseUrl + api,{headers: { Auth: this.token }});
+      return this.h.delete(this.baseUrl + api, { headers: { Auth: this.token } });
     }
   }
 

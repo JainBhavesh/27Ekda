@@ -43,11 +43,11 @@ export class AppComponent {
     public bs: BasicService
   ) {
     this.initializeApp();
-    if (localStorage.phoneNo !== undefined) {
-      this.navCtrl.navigateRoot('my-calendar');
-    } else {
-      this.navCtrl.navigateRoot('login');
-    }
+    // if (localStorage.phoneNo !== undefined) {
+    //   this.navCtrl.navigateRoot('my-calendar');
+    // } else {
+    //   this.navCtrl.navigateRoot('login');
+    // }
   }
 
   initializeApp() {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import * as $ from 'jquery';
 import { NavController } from '@ionic/angular';
 import { AlertModule } from '../../Module/alert/alert.module';
@@ -16,61 +16,72 @@ export class CheckOtpPage {
   userExist: any;
   constructor(
     public router: Router,
+    public activated: ActivatedRoute,
     public navCtrl: NavController,
     public alert: AlertModule,
     public bs: BasicService,
-    public activated: ActivatedRoute
+    public zone: NgZone
   ) {
-    this.activated.queryParams.subscribe(data => {
-      this.otp = data.otp;
-      this.mobileNo = data.phone_no;
-      this.userExist = data.is_user_exist;
+    this.activated.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state.user) {
+        const data = this.router.getCurrentNavigation().extras.state.user;
+        this.zone.run(() => {
+          this.otp = data.otp;
+          this.mobileNo = data.phone_no;
+          this.userExist = data.is_user_exist;
+        })
+      }
     });
     this.bs.getDeviceType();
   }
 
-  ionViewWillEnter() {
-    // this.otp = 1234;
-  }
-
   otpFormSubmit() {
-    $('input[type=hidden][name=otpHidden]').each((i, val: any) => {
-      this.otpArr.push(val.value);
-    });
-    const self = this;
-    setTimeout(() => {
-      console.log(self.otpArr.toString().replace(/,/g, ''));
-      const inputOTP = self.otpArr.toString().replace(/,/g, '');
-      if (inputOTP == self.otp) {
-        const data = {
-          is_user_exist: this.userExist,
-          phone_no: this.mobileNo,
-          device_type: this.bs.deviceType,
-          device_token: this.bs.deviceToken
+    try {
+      this.bs.showLoader();
+      $('input[type=hidden][name=otpHidden]').each((i, val: any) => {
+        this.otpArr.push(val.value);
+      });
+      const self = this;
+      setTimeout(() => {
+        const inputOTP = self.otpArr.toString().replace(/,/g, '');
+        if (inputOTP == self.otp) {
+          const data = {
+            is_user_exist: self.userExist,
+            phone_no: self.mobileNo,
+            device_type: self.bs.deviceType,
+            device_token: self.bs.deviceToken
+          }
+          self.bs.hitApi('post', 'user/check-otp', data).subscribe((receivedData: any) => {
+            self.bs.DismissLoader();
+            // if (receivedData.status) {
+            //   this.bs.setUserData(receivedData.data);
+            //   if (this.userExist == true) {
+            //     self.navCtrl.navigateRoot('my-calendar');
+            //   } else {
+            //     self.navCtrl.navigateRoot('profile', {
+            //       queryParams: {
+            //         cno: { cno: localStorage.phoneNo }
+            //       }
+            //     });
+            //   }
+            // }
+            console.log(receivedData);
+          }, error => {
+            self.bs.DismissLoader();
+            console.log(error);
+            self.alert.openAlert('Ekda', 'Error from server side..', 'OK');
+          });
+        } else {
+          self.bs.DismissLoader();
+          self.alert.openAlert('Ekda', 'Please enter valid OTP', 'OK').then(() => {
+            self.otpArr = [];
+          });
         }
-        this.bs.hitApi('post',
-          'user/check-otp',
-          data,
-        ).subscribe((receivedData: any) => {
-          // if (receivedData.status) {
-          //   this.bs.setUserData(receivedData.data);
-          //   if (this.userExist == true) {
-          //     self.navCtrl.navigateRoot('my-calendar');
-          //   } else {
-          //     self.navCtrl.navigateRoot('profile', {
-          //       queryParams: {
-          //         cno: { cno: localStorage.phoneNo }
-          //       }
-          //     });
-          //   }
-          // }
-        });
-      } else {
-        self.alert.openAlert('Ekda', 'Please enter valid OTP', 'OK').then(() => {
-          self.otpArr = [];
-        });
-      }
-    }, 1000);
+      }, 1000);
+    } catch (error) {
+      console.log(error);
+      this.bs.DismissLoader();
+    }
   }
 
   otpController(event, next, prev) {
@@ -81,9 +92,5 @@ export class CheckOtpPage {
     } else {
       return 0;
     }
-  }
-
-  resendCode() {
-
   }
 }
