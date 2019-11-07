@@ -28,6 +28,7 @@ export class DonorsPage {
         } else {
         }
       },error => {
+        this.bs.DismissLoader();
         this.alert.openAlert('Ekda', 'Error from server side..', 'OK');
       });
     } catch (error) {
