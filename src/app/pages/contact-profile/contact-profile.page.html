@@ -22,13 +22,13 @@
       </ion-label>
       <ion-label>
         <h2 class="font-black">
-          {{userData.fname}} {{userData.mname}} {{userData.lname}}
+          {{userData.first_name}} {{userData.middle_name}} {{userData.sur_name}}
         </h2>
         <h2>
-          {{userData.cno}}
+          {{userData.phone_no}}
         </h2>
         <h2>
-          {{userData.mail}}
+          {{userData.email}}
         </h2>
       </ion-label>
     </ion-card>
@@ -42,13 +42,13 @@
           {{userData.address}},
         </h2>
         <h2>
-          {{userData.area}},
+          {{userData.city}},
         </h2>
         <h2>
-          {{userData.suburbLists}}
+          {{userData.country}}
         </h2>
         <h3>
-          {{userData.pinCode}}
+          {{userData.pin_code}}
         </h3>
       </ion-label>
     </ion-card>
@@ -59,7 +59,7 @@
       </ion-label>
       <ion-label>
         <h2 class="font-black">
-          {{userData.fname}} {{userData.mname}} {{userData.lname}}
+          {{userData.first_name}} {{userData.middle_name}} {{userData.sur_name}}
         </h2>
         <h2>
           DOB: {{userData.dob | date: 'dd/MM/yyyy'}}

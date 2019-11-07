@@ -26,21 +26,14 @@ export class MyCalendarPage {
   }
 
   getUserList() {
-    try {
-      this.bs.showLoader();
-      const data = {
-        user_id: localStorage.userID
-      }
-      this.bs.hitApi('post', 'user/user-list', data).subscribe((receivedData: any) => {
-        this.userData = receivedData.data.user_list;
-        this.bs.DismissLoader();
-      }, error => {
-        console.log('Error in userList => ', error);
-        this.bs.DismissLoader();
-      });
-    } catch (error) {
-      this.bs.DismissLoader();
+    this.bs.showLoader();
+    const data = {
+      user_id: this.bs.userId
     }
+    this.bs.hitApi('post', 'user/user-list', data).subscribe((receivedData: any) => {
+      this.userData = receivedData.data.user_list;
+      this.bs.DismissLoader();
+    });
   }
 
   ionViewWillEnter() {
