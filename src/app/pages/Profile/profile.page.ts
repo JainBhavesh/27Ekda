@@ -180,7 +180,7 @@ export class ProfilePage {
         console.log(error);
       });
     } else {
-      localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
+      this.alert.showToast('Please enter your valuable feedback.', 'top', 2000);
     }
     // console.log(val.value);
   }
