@@ -14,7 +14,6 @@ import { Contacts } from '@ionic-native/contacts/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HTTP } from '@ionic-native/http/ngx';
 // import { Push } from '@ionic-native/push/ngx';
 
 /** Modules */
@@ -53,7 +52,6 @@ import { PipesModule } from './pipes/pipes.module';
     Crop,
     Contacts,
     Base64,
-    HTTP,
     // Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

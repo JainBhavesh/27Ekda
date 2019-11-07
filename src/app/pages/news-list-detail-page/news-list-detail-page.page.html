@@ -1,9 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>newsListDetailPage</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>News Details</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>
+                {{newsDetails?.title}}
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            {{newsDetails?.description}}
+        </ion-card-content>
+    </ion-card>
 </ion-content>

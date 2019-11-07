@@ -51,7 +51,7 @@ export class CheckOtpPage {
             device_type: self.bs.deviceType,
             device_token: self.bs.deviceToken
           }
-          self.bs.hitApi('post', 'user/check-otp', data).subscribe((receivedData: any) => {
+          self.bs.hitApi('post', 'check-otp', data).subscribe((receivedData: any) => {
             self.bs.DismissLoader();
             // if (receivedData.status) {
             //   this.bs.setUserData(receivedData.data);

@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, ToastController, Platform } from '@ionic/angular';
-import { map } from 'rxjs/operators';
 import { Storage } from '@ionic/storage';
 import * as $ from 'jquery';
-import { HTTP } from '@ionic-native/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +30,7 @@ export class BasicService {
   email: any;
   profilePic: any;
   constructor(
-    public http: HTTP,
-    public h: HttpClient,
+    public http: HttpClient,
     public loadingCtrl: LoadingController,
     public toastController: ToastController,
     public storage: Storage,
@@ -57,11 +54,11 @@ export class BasicService {
     // });
 
     if (method == 'get') {
-      return this.h.get(this.baseUrl + api, { headers: { Auth: this.token } });
+      return this.http.get(this.baseUrl + api, { headers: { Auth: this.token } });
     } else if (method == 'post') {
-      return this.h.post(this.baseUrl + api, params, { headers: { Auth: this.token } });
+      return this.http.post(this.baseUrl + api, params, { headers: { Auth: this.token } });
     } else if (method == 'delete') {
-      return this.h.delete(this.baseUrl + api, { headers: { Auth: this.token } });
+      return this.http.delete(this.baseUrl + api, { headers: { Auth: this.token } });
     }
   }
 
