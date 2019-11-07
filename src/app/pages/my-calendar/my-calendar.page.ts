@@ -83,16 +83,11 @@ export class MyCalendarPage {
     const data = {
       user_id: this.bs.userId
     }
-    this.bs.hitApi(
-      'user/user-list',
-      data,
-      'POST',
-      true)
-      .then((receivedData: any) => {
-        this.userData = receivedData.data.user_list;
-      }).catch(e => {
-        console.log('Error in userList => ', e);
-      });
+    this.bs.hitApi('post', 'user/user-list', data).subscribe((receivedData: any) => {
+      this.userData = receivedData.user_list;
+    }, error => {
+      console.log('Error in userList => ', error);
+    });
   }
 
   ionViewWillEnter() {

@@ -42,27 +42,27 @@ export class BasicService {
 
   }
 
-  async hitApi(api, params: {}, method, loader) {
-    if (loader) {
-      this.showLoader();
+  hitApi(method:string,api: string, params: {}) {
+    // await this.http.post(
+    //   this.baseUrl + api,
+    //   params,
+    //   { Auth: this.token }
+    // ).then(receivedData => {
+    //   this.DismissLoader();
+    //   return JSON.parse(receivedData.data);
+    // }).catch(error => {
+    //   console.log('Error in plugin => ', error);
+    //   this.DismissLoader();
+    //   this.errorCall(error);
+    // });
+
+    if (method == 'get') {
+      return this.h.get(this.baseUrl + api,{headers: { Auth: this.token }});
+    } else if (method == 'post') {
+      return this.h.post(this.baseUrl + api, params,{headers: { Auth: this.token }});
+    } else if (method == 'delete') {
+      return this.h.delete(this.baseUrl + api,{headers: { Auth: this.token }});
     }
-    await this.http.post(
-      this.baseUrl + api,
-      params,
-      { Auth: this.token }
-    ).then(receivedData => {
-      this.DismissLoader();
-      return JSON.parse(receivedData.data);
-    }).catch(error => {
-      console.log('Error in plugin => ', error);
-      this.DismissLoader();
-      this.errorCall(error);
-    });
-
-
-    // this.h.post(this.baseUrl + api, params, {}).subscribe(data => {
-    //   console.log('Data => ', data);
-    // })
   }
 
   getDeviceType() {

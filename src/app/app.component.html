@@ -1,10 +1,10 @@
 <ion-app>
     <!-- <ion-split-pane> -->
-    <ion-menu class="menu" mode="ios">
-        <ion-header text-center padding-top class="menu_header" [routerLink]="['/profile']" mode="ios">
+    <ion-menu class="menu" mode="ios" contentId="my-menu">
+        <ion-header class="menu_header ion-text-center ion-padding-top" [routerLink]="['/profile']" mode="ios">
             <!-- <img [src]="userData?.image != '' ? _DomSanitizer.bypassSecurityTrustUrl(userData?.image) : '../../assets/img/user.png'" class="user_logo" /> -->
             <img src='../../assets/img/user.png' class="user_logo" />
-            <ion-toolbar text-center color="primary">
+            <ion-toolbar class="ion-text-center" color="primary">
                 <ion-title>{{userData?.fname}} {{userData?.lname}}</ion-title>
             </ion-toolbar>
             <!-- <p no-margin margin-bottom>{{userData?.occupation}}</p> -->
@@ -29,10 +29,10 @@
                 </ion-menu-toggle>
             </ion-list>
         </ion-content>
-        <ion-footer text-center padding-vertical no-lines *ngIf="version != ''" class="setFootercolor">
+        <ion-footer no-lines *ngIf="version != ''" class="setFootercolor ion-text-center ion-padding-vertical">
             <ion-text color="light">Version {{version}}</ion-text>
         </ion-footer>
     </ion-menu>
-    <ion-router-outlet main></ion-router-outlet>
+    <ion-router-outlet id="my-menu"></ion-router-outlet>
     <!-- </ion-split-pane> -->
 </ion-app>
