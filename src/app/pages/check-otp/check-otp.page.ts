@@ -53,19 +53,18 @@ export class CheckOtpPage {
           }
           self.bs.hitApi('post', 'check-otp', data).subscribe((receivedData: any) => {
             self.bs.DismissLoader();
-            // if (receivedData.status) {
-            //   this.bs.setUserData(receivedData.data);
-            //   if (this.userExist == true) {
-            //     self.navCtrl.navigateRoot('my-calendar');
-            //   } else {
-            //     self.navCtrl.navigateRoot('profile', {
-            //       queryParams: {
-            //         cno: { cno: localStorage.phoneNo }
-            //       }
-            //     });
-            //   }
-            // }
-            console.log(receivedData);
+            if (receivedData.status) {
+              this.bs.setUserData(receivedData.data);
+              if (this.userExist == true) {
+                self.navCtrl.navigateRoot('my-calendar');
+              } else {
+                self.navCtrl.navigateRoot('profile', {
+                  queryParams: {
+                    cno: { cno: localStorage.phoneNo }
+                  }
+                });
+              }
+            }
           }, error => {
             self.bs.DismissLoader();
             console.log(error);
