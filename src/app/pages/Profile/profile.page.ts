@@ -58,6 +58,7 @@ export class ProfilePage {
         this.profileForm.patchValue(params.cno);
       } else {
         this.storage.get('userData').then(data => {
+          console.log(data);
           this.profileForm.patchValue(data);
         });
       }
@@ -162,33 +163,28 @@ export class ProfilePage {
   }
 
   profileFormSubmit(val: any) {
+    this.bs.showLoader();
     val.value.profileId = this.userImage;
-    console.log('User value => ', val.value);
     if (val.value) {
-      const storeData = [{
-        phoneNumber: this.phno,
-        userDetails: val.value
-      }];
-      // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const uservalue = val.value;
       const userId = {
         user_id: this.bs.userId
       };
       const data = Object.assign(uservalue, userId);
-      console.log('Hit api update profile data => ', data);
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
-        console.log(receivedData);
-        // if (receivedData.status) {
-        //   this.bs.setUserData(receivedData.data);
-        //   this.navCtrl.navigateRoot('my-calendar');
-        // }
+        this.bs.DismissLoader();
+        if (receivedData.status) {
+          this.bs.setUserData(receivedData.data);
+          this.alert.openAlert('Ekda',receivedData.msg,'OK');
+        }
         this.navCtrl.navigateRoot('my-calendar');
       }, error => {
+        this.bs.DismissLoader();
         console.log(error);
       });
     } else {
+      this.bs.DismissLoader();
       localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
     }
-    // console.log(val.value);
   }
 }

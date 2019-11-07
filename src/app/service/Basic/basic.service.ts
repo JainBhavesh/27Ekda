@@ -93,12 +93,11 @@ export class BasicService {
   }
 
   setUserData(data) {
-    console.log('Received Data => ', data);
     this.storage.set('userData', data);
     this.mobileNo = data.phone_no;
     this.firstName = data.first_name;
     this.middleName = data.middle_name;
-    this.lastName = data.last_name;
+    this.lastName = data.sur_name;
     this.email = data.email;
     this.address = data.address;
     this.dob = data.dob;
@@ -113,7 +112,6 @@ export class BasicService {
   async getUserData() {
     await this.storage.get('userData').then(data => {
       if (data != null) {
-        console.log('userData => ', data);
         this.token = data.access_token;
         this.userId = data.user_id;
         this.mobileNo = data.phone_no;
