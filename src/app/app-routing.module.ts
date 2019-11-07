@@ -41,10 +41,7 @@ const routes: Routes = [
   {
     path: 'news-list-detail-page',
     loadChildren: './pages/news-list-detail-page/news-list-detail-page.module#NewsListDetailPagePageModule'
-  }
-
-
-];
+  }];
 
 @NgModule({
   imports: [

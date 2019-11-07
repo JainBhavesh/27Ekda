@@ -119,7 +119,7 @@ export class BasicService {
         this.mobileNo = data.phone_no;
         this.firstName = data.first_name;
         this.middleName = data.middle_name;
-        this.lastName = data.last_name;
+        this.lastName = data.sur_name;
         this.email = data.email;
         this.address = data.address;
         this.dob = data.dob;
