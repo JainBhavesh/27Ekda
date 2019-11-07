@@ -56,7 +56,6 @@
     "jquery": "^3.4.1",
     "moment": "^2.24.0",
     "phonegap-plugin-multidex": "1.0.0",
-    "phonegap-plugin-push": "^2.3.0",
     "rxjs": "^6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.8.29"
@@ -107,8 +106,7 @@
       "com-badrit-base64": {},
       "cordova-plugin-advanced-http": {
         "OKHTTP_VERSION": "3.10.0"
-      },
-      "phonegap-plugin-push": {}
+      }
     },
     "platforms": [
       "android"
