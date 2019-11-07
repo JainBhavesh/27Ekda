@@ -25,7 +25,7 @@
         <ion-card *ngFor="let list of userData">
             <ion-item lines=none (click)="profile(list)">
                 <ion-avatar slot="start">
-                    <img [src]="list.profileId" />
+                    <img [src]="list.profile_pic" />
                 </ion-avatar>
                 <ion-label>
                     <h2 class="fc-blue">{{list?.first_name}} {{list?.middle_name}} {{list?.sur_name}}</h2>
