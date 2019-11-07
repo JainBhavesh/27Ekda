@@ -44,6 +44,9 @@ export class MyCalendarPage {
 
   filterPage() {
     this.filterData = !this.filterData;
+    if(!this.filterData){
+      this.getUserList();
+    }
   }
 
   filterUserList() {
@@ -61,6 +64,7 @@ export class MyCalendarPage {
       console.log(error);
     }
   }
+
   profile(list: any) {
     this.navCtrl.navigateForward('contact-profile', {
       queryParams: {

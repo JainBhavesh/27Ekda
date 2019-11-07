@@ -37,7 +37,7 @@ export class AppComponent {
     },{
       title: 'Feedback',
       url: '/feedback',
-      icon: 'pricetag'
+      icon: 'create'
     }
   ];
 

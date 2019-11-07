@@ -22,8 +22,7 @@ export class ContactProfilePage {
     this.route.queryParams.subscribe(params => {
       if (params.data) {
         this.userData = params.data;
-        console.log('UserData => ', this.userData);
-        this.userImage = params.data.profile_pic;
+        this.userImage = params.data.image;
       } else {
         this.navCtrl.pop();
       }
