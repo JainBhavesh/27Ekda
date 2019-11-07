@@ -1,5 +1,9 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
         <ion-title>News Details</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -7,10 +11,9 @@
 <ion-content>
     <ion-card>
         <ion-card-header>
-            <ion-card-subtitle>
-                {{newsDetails?.title}}
-            </ion-card-subtitle>
+            <ion-card-title>{{newsDetails?.title}}</ion-card-title>
         </ion-card-header>
+
         <ion-card-content>
             {{newsDetails?.description}}
         </ion-card-content>

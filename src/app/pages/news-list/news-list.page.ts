@@ -17,11 +17,16 @@ export class NewsListPage {
     public router: Router
   ) { }
 
+  ionViewWillEnter(){
+    this.getNewsData();
+  }
   getNewsData() {
+    this.bs.showLoader();
     const data = {
       user_id: localStorage.userID
     }
     this.bs.hitApi('post', 'user/news-list', data).subscribe((receivedData: any) => {
+      this.bs.DismissLoader();
       if (receivedData.status) {
         this.newsData = receivedData.data.news_lists;
       } else {

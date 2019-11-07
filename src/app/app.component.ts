@@ -33,8 +33,12 @@ export class AppComponent {
     }, {
       title: 'News',
       url: '/news-list',
-      icon: 'wallet'
-    },
+      icon: 'pricetag'
+    },{
+      title: 'Feedback',
+      url: '/feedback',
+      icon: 'pricetag'
+    }
   ];
 
   constructor(
