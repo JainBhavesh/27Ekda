@@ -57,11 +57,11 @@ export class BasicService {
     // });
 
     if (method == 'get') {
-      return this.h.get(this.baseUrl + api);
+      return this.h.get(this.baseUrl + api,{headers: { Auth: this.token }});
     } else if (method == 'post') {
-      return this.h.post(this.baseUrl + api, params);
+      return this.h.post(this.baseUrl + api, params,{headers: { Auth: this.token }});
     } else if (method == 'delete') {
-      return this.h.delete(this.baseUrl + api);
+      return this.h.delete(this.baseUrl + api,{headers: { Auth: this.token }});
     }
   }
 
