@@ -51,9 +51,9 @@ export class BasicService {
 
   getDeviceType() {
     if (this.platform.is('android')) {
-      this.deviceType = 'Android'
+      this.deviceType = 'Android';
     } else {
-      this.deviceType = 'Ios'
+      this.deviceType = 'Ios';
     }
   }
 
@@ -111,20 +111,24 @@ export class BasicService {
   }
 
   async getUserData() {
-    return await this.storage.get('userData').then(data => {
-      this.mobileNo = data.phone_no;
-      this.firstName = data.first_name;
-      this.middleName = data.middle_name;
-      this.lastName = data.last_name;
-      this.email = data.email;
-      this.address = data.address;
-      this.dob = data.dob;
-      this.token = data.access_token;
-      this.city = data.city;
-      this.state = data.state;
-      this.county = data.county;
-      this.pincode = data.pin_code;
-      this.profilePic = data.profile_pic;
+    await this.storage.get('userData').then(data => {
+      if (data != null) {
+        console.log('userData => ', data);
+        this.userId = data.user_id;
+        this.mobileNo = data.phone_no;
+        this.firstName = data.first_name;
+        this.middleName = data.middle_name;
+        this.lastName = data.last_name;
+        this.email = data.email;
+        this.address = data.address;
+        this.dob = data.dob;
+        this.token = data.access_token;
+        this.city = data.city;
+        this.state = data.state;
+        this.county = data.county;
+        this.pincode = data.pin_code;
+        this.profilePic = data.profile_pic;
+      }
     });
   }
 }
