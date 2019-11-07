@@ -35,10 +35,6 @@ const routes: Routes = [
     loadChildren: './pages/contact-profile/contact-profile.module#ContactProfilePageModule'
   },
   {
-    path: 'feedback',
-    loadChildren: './pages/feedback/feedback.module#FeedbackPageModule'
-  },
-  {
     path: 'news-list',
     loadChildren: './pages/news-list/news-list.module#NewsListPageModule'
   },

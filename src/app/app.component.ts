@@ -30,6 +30,10 @@ export class AppComponent {
       title: 'Donors',
       url: '/donors',
       icon: 'wallet'
+    },{
+      title: 'News',
+      url: '/news-list',
+      icon: 'wallet'
     },
   ];
 
@@ -96,6 +100,7 @@ export class AppComponent {
     this.bs.hitApi('post', 'user/log-out', data).subscribe((response: any) => {
       localStorage.removeItem('phoneNo');
       localStorage.removeItem('userID');
+      this.storage.remove('userData');
     });
   }
 
