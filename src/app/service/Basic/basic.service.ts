@@ -114,6 +114,7 @@ export class BasicService {
     await this.storage.get('userData').then(data => {
       if (data != null) {
         console.log('userData => ', data);
+        this.token = data.access_token;
         this.userId = data.user_id;
         this.mobileNo = data.phone_no;
         this.firstName = data.first_name;

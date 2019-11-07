@@ -23,7 +23,7 @@ export class ContactProfilePage {
       if (params.data) {
         this.userData = params.data;
         console.log('UserData => ', this.userData);
-        this.userImage = params.data.profileId;
+        this.userImage = params.data.profile_pic;
       } else {
         this.navCtrl.pop();
       }
