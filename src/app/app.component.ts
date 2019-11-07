@@ -43,11 +43,11 @@ export class AppComponent {
     public bs: BasicService
   ) {
     this.initializeApp();
-    // if (localStorage.phoneNo !== undefined) {
-    //   this.navCtrl.navigateRoot('my-calendar');
-    // } else {
-    //   this.navCtrl.navigateRoot('login');
-    // }
+    if (localStorage.phoneNo !== undefined) {
+      this.navCtrl.navigateRoot('my-calendar');
+    } else {
+      this.navCtrl.navigateRoot('login');
+    }
   }
 
   initializeApp() {
@@ -84,7 +84,13 @@ export class AppComponent {
   }
 
   logout() {
-    localStorage.setItem('isLogin', 'false');
+    const data = {
+      user_id: localStorage.userID,
+      device_token: this.bs.deviceToken
+    }
+    this.bs.hitApi('post', 'user/log-out', data).subscribe((response: any) => {
+      localStorage.removeItem('phoneNo');
+    });
   }
 
   // pushNotifictions() {

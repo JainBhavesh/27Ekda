@@ -51,6 +51,7 @@ export class ProfilePage {
       // siblings: '',
     });
     this.route.queryParams.subscribe(params => {
+      console.log(params);
       if (params.data) {
         this.profileForm.patchValue(params.data);
       } else if (params.cno) {
