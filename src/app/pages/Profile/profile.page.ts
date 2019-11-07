@@ -165,10 +165,6 @@ export class ProfilePage {
     val.value.profileId = this.userImage;
     console.log('User value => ', val.value);
     if (val.value) {
-      const storeData = [{
-        phoneNumber: this.phno,
-        userDetails: val.value
-      }];
       // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const uservalue = val.value;
       const userId = {
@@ -177,11 +173,8 @@ export class ProfilePage {
       const data = Object.assign(uservalue, userId);
       console.log('Hit api update profile data => ', data);
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
-        console.log(receivedData);
-        // if (receivedData.status) {
-        //   this.bs.setUserData(receivedData.data);
-        //   this.navCtrl.navigateRoot('my-calendar');
-        // }
+        this.bs.setUserData(receivedData.data);
+        this.alert.showToast('Your profile update successfully.', 'top', 2000);
         this.navCtrl.navigateRoot('my-calendar');
       }, error => {
         console.log(error);
