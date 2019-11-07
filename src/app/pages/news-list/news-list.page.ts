@@ -19,7 +19,7 @@ export class NewsListPage {
 
   getNewsData() {
     const data = {
-      user_id: this.bs.userId
+      user_id: localStorage.userID
     }
     this.bs.hitApi('post', 'user/news-list', data).subscribe((receivedData: any) => {
       if (receivedData.status) {

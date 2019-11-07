@@ -90,6 +90,7 @@ export class AppComponent {
     }
     this.bs.hitApi('post', 'user/log-out', data).subscribe((response: any) => {
       localStorage.removeItem('phoneNo');
+      localStorage.removeItem('userID');
     });
   }
 

@@ -169,7 +169,7 @@ export class ProfilePage {
       }];
       // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const data = {
-        user_id: this.bs.userId,
+        user_id: localStorage.userID
       }
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
         console.log(receivedData);

@@ -21,11 +21,13 @@ export class MyCalendarPage {
   }
 
   getUserList() {
+    this.bs.showLoader();
     const data = {
       user_id: localStorage.userID
     }
     this.bs.hitApi('post', 'user/user-list', data).subscribe((receivedData: any) => {
-      this.userData = receivedData.user_list;
+      this.userData = receivedData.data.user_list;
+      this.bs.DismissLoader();
     }, error => {
       console.log('Error in userList => ', error);
     });
