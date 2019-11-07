@@ -3,57 +3,32 @@
         <ion-title>Login</ion-title>
     </ion-toolbar>
 </ion-header> -->
-<ion-content padding>
-    <div text-center margin-top>
-        <img src="../../../../assets/icon/logo.png" alt="Logo" width="150"
-            height=150 />
+<ion-content class="ion-padding">
+    <div class="ion-text-center ion-margin-top">
+        <img src="../../../../assets/icon/logo.png" alt="Logo" width="150" height=150 />
     </div>
     <div class="form">
-        <!-- <ion-row class="ion-align-items-end setBottom" margin-bottom>
-            <ion-col size="12" sizeMd="6" offsetMd="3" sizeLg="6" offsetLg="3"
-                sizeXl="4" offsetXl="4"> -->
-        <form [formGroup]="loginForm"
-            (ngSubmit)="loginformSubmit(loginForm)">
-            <ion-item no-padding line="none">
-                <ion-label position="floating" color=dark>Enter Phone
-                    No
+        <form [formGroup]="loginForm" (ngSubmit)="loginformSubmit(loginForm)">
+            <ion-item class="ion-no-padding" line="none">
+                <ion-label position="floating" color=dark>Enter Phone No
                     <ion-text color="danger">*</ion-text>
                 </ion-label>
-                <ion-input
-                    type="number"
-                    name="phone"
-                    formControlName="phone">
-                </ion-input>
+                <ion-input type="number" name="phone" formControlName="phone"></ion-input>
             </ion-item>
-            <div margin-top margin-left
-                *ngIf="!loginForm.controls.phone.valid
-                &&(loginForm.controls.phone.dirty
-                ||loginForm.controls.phone.touched)">
-                <div
-                    *ngIf="loginForm.controls['phone'].errors['required']">
+            <div class="ion-margin-top ion-margin-left" *ngIf="!loginForm.controls.phone.valid &&(loginForm.controls.phone.dirty ||loginForm.controls.phone.touched)">
+                <div *ngIf="loginForm.controls['phone'].errors['required']">
                     <ion-text color="danger">Phone Number is required.</ion-text>
                 </div>
-                <div
-                    *ngIf="loginForm.controls['phone'].errors['pattern']">
+                <div *ngIf="loginForm.controls['phone'].errors['pattern']">
                     <ion-text color="danger">Enter Proper number.</ion-text>
                 </div>
             </div>
-            <div text-center padding>
-                <ion-button type="submit" class="btn" expand="block"
-                    [disabled]="!loginForm.valid">
+            <div class="ion-text-center ion-padding">
+                <ion-button type="submit" class="btn" expand="block" [disabled]="!loginForm.valid">
                     <ion-ripple-effect></ion-ripple-effect>
                     Login
                 </ion-button>
             </div>
         </form>
-        <!-- </ion-col>
-            <ion-col size="12" sizeMd="6" offsetMd="3">
-                <ion-button class="btn" expand="block"
-                    [routerLink]="['/register']">
-                    <ion-ripple-effect></ion-ripple-effect>
-                    Create Account
-                </ion-button>
-            </ion-col>
-        </ion-row> -->
     </div>
 </ion-content>

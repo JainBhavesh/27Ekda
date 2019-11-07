@@ -8,15 +8,15 @@
 </ion-header>
 
 <ion-content class="profile">
-  <ion-card class="ImageCard" no-margin>
+  <ion-card class="ImageCard ion-no-margin">
     <ion-row>
-      <ion-col text-center size="12">
+      <ion-col class="ion-text-center" size="12">
         <img class="propicImg" [src]="userImage" />
       </ion-col>
     </ion-row>
   </ion-card>
   <div style="margin-top: -50px;">
-    <ion-card padding class="contentCard" *ngIf="userData">
+    <ion-card class="contentCard ion-padding" *ngIf="userData">
       <ion-label>
         <h1 class="fc-blue">Contact</h1>
       </ion-label>
@@ -53,7 +53,7 @@
       </ion-label>
     </ion-card>
 
-    <ion-card class="radiusBottom" padding *ngIf="userData">
+    <ion-card class="radiusBottom ion-padding" *ngIf="userData">
       <ion-label>
         <h1 class="fc-blue">About</h1>
       </ion-label>
