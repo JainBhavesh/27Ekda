@@ -7,10 +7,15 @@ import { BasicService } from 'src/app/service/Basic/basic.service';
   styleUrls: ['./my-calendar.page.scss']
 })
 export class MyCalendarPage {
-
+  public filterData: boolean = false;
   public searchKey: any = '';
   public dummy: any = '';
   public userData: any;
+  public filterSelectedData = {
+    gender: '',
+    pincode: '',
+    city: ''
+  }
   constructor(
     public menuCtrl: MenuController,
     public navCtrl: NavController,
@@ -38,10 +43,11 @@ export class MyCalendarPage {
   }
 
   filterPage() {
-    this.navCtrl.navigateForward('filters');
+    this.filterData = !this.filterData;
+    // this.navCtrl.navigateForward('filters');
   }
 
-  profile(list) {
+  profile(list: any) {
     this.navCtrl.navigateForward('contact-profile', {
       queryParams: {
         data: list
