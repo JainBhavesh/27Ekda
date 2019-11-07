@@ -22,7 +22,7 @@ export class MyCalendarPage {
 
   getUserList() {
     const data = {
-      user_id: this.bs.userId
+      user_id: localStorage.userID
     }
     this.bs.hitApi('post', 'user/user-list', data).subscribe((receivedData: any) => {
       this.userData = receivedData.data.user_list;

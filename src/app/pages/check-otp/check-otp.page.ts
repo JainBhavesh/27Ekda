@@ -54,17 +54,18 @@ export class CheckOtpPage {
           self.bs.hitApi('post', 'check-otp', data).subscribe((receivedData: any) => {
             self.bs.DismissLoader();
             if (receivedData.status) {
-              this.bs.userId = receivedData.data.user_id;
-              this.bs.setUserData(receivedData.data);
-              if (this.userExist == true) {
-                self.navCtrl.navigateRoot('my-calendar');
+              self.bs.setUserData(receivedData.data);
+              if (self.userExist == true) {
+                self.navCtrl.navigateRoot(['my-calendar']);
               } else {
                 self.navCtrl.navigateRoot('profile', {
                   queryParams: {
-                    cno: { cno: localStorage.phoneNo }
+                    cno: self.mobileNo
                   }
                 });
               }
+              localStorage.phoneNo = self.mobileNo;
+              localStorage.userID = receivedData.data.user_id
             }
           }, error => {
             self.bs.DismissLoader();

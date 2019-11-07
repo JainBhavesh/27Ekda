@@ -89,7 +89,13 @@ export class AppComponent {
   }
 
   logout() {
-    localStorage.setItem('isLogin', 'false');
+    const data = {
+      user_id: localStorage.userID,
+      device_token: this.bs.deviceToken
+    }
+    this.bs.hitApi('post', 'user/log-out', data).subscribe((response: any) => {
+      localStorage.removeItem('phoneNo');
+    });
   }
 
   pushNotifictions() {
