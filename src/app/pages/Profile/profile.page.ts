@@ -170,10 +170,7 @@ export class ProfilePage {
       const data = {
         user_id: this.bs.userId,
       }
-      this.bs.hitApi('post',
-        'user/update-profile',
-        data
-      ).subscribe((receivedData: any) => {
+      this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
         console.log(receivedData);
         // if (receivedData.status) {
         //   this.bs.setUserData(receivedData.data);

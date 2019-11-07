@@ -14,8 +14,7 @@
                 <img class="propicImg" [src]="userImage" />
             </ion-col>
             <ion-col text-center size="12">
-                <ion-text color="light" (click)="showactionSheet()"> Change
-                    Profile Photo</ion-text>
+                <ion-text color="light" (click)="showactionSheet()"> Change Profile Photo</ion-text>
             </ion-col>
         </ion-row>
     </ion-card>
@@ -24,8 +23,7 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">Contact
-                            number
+                        <ion-label position="floating" class="label-fontsize">Contact number
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
                         <ion-input type="number" name="cno" formControlName="cno" disabled="true"></ion-input>
@@ -34,8 +32,7 @@
 
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">First
-                            Name
+                        <ion-label position="floating" class="label-fontsize">First Name
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
                         <ion-input name="fname" formControlName="fname"></ion-input>
@@ -51,8 +48,7 @@
 
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">Middle
-                            Name
+                        <ion-label position="floating" class="label-fontsize">Middle Name
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
                         <ion-input name="mname" formControlName="mname"></ion-input>
@@ -68,8 +64,7 @@
 
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">Last
-                            Name
+                        <ion-label position="floating" class="label-fontsize">Last Name
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
                         <ion-input name="lname" formControlName="lname"></ion-input>
@@ -85,8 +80,8 @@
 
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">Mother
-                            Name</ion-label>
+                        <ion-label position="floating" class="label-fontsize">Mother Name
+                        </ion-label>
                         <ion-input type="text" name="motherName" formControlName="motherName"></ion-input>
                     </ion-item>
                 </ion-col>
@@ -95,8 +90,7 @@
                         <ion-label>Gender
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
-                        <ion-select placeholder="Select Gender" okText="Select" cancelText="Dismiss" name="gender"
-                            formControlName="gender" mode="ios">
+                        <ion-select placeholder="Select Gender" okText="Select" cancelText="Dismiss" name="gender" formControlName="gender" mode="ios">
                             <ion-select-option value="female">Female</ion-select-option>
                             <ion-select-option value="male">Male</ion-select-option>
                         </ion-select>
@@ -114,8 +108,7 @@
                         <ion-label>DOB
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
-                        <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Select Date" name="dob"
-                            formControlName="dob"></ion-datetime>
+                        <ion-datetime displayFormat="MM/DD/YYYY" placeholder="Select Date" name="dob" formControlName="dob"></ion-datetime>
                     </ion-item>
                     <div margin-top margin-left *ngIf="!profileForm.controls.dob.valid
                         &&(profileForm.controls.dob.dirty
@@ -161,8 +154,7 @@
 
                 <ion-col size="12">
                     <ion-item no-padding>
-                        <ion-label position="floating" class="label-fontsize">Suburb
-                            Lists
+                        <ion-label position="floating" class="label-fontsize">Suburb Lists
                             <ion-text color="danger"> * </ion-text>
                         </ion-label>
                         <ion-input type="text" name="suburbLists" formControlName="suburbLists"></ion-input>
@@ -212,8 +204,7 @@
                 </ion-col>
 
                 <ion-col size="10" offset="1">
-                    <ion-button shape="round" expand="block" type="submit" [disabled]="!profileForm.valid"
-                        (click)="profileFormSubmit(profileForm)">
+                    <ion-button shape="round" expand="block" type="submit" [disabled]="!profileForm.valid" (click)="profileFormSubmit(profileForm)">
                         <ion-ripple-effect></ion-ripple-effect>
                         Update Profile
                     </ion-button>
