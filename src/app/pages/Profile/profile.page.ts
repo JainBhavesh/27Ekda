@@ -58,7 +58,6 @@ export class ProfilePage {
         this.profileForm.patchValue(params.cno);
       } else {
         this.storage.get('userData').then(data => {
-          console.log(data);
           this.profileForm.patchValue(data);
         });
       }
@@ -166,25 +165,22 @@ export class ProfilePage {
     this.bs.showLoader();
     val.value.profileId = this.userImage;
     if (val.value) {
+      // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const uservalue = val.value;
       const userId = {
         user_id: this.bs.userId
       };
       const data = Object.assign(uservalue, userId);
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
-        this.bs.DismissLoader();
-        if (receivedData.status) {
-          this.bs.setUserData(receivedData.data);
-          this.alert.openAlert('Ekda',receivedData.msg,'OK');
-        }
+        this.bs.setUserData(receivedData.data);
+        this.alert.showToast('Your profile update successfully.', 'top', 2000);
         this.navCtrl.navigateRoot('my-calendar');
       }, error => {
         this.bs.DismissLoader();
         console.log(error);
       });
     } else {
-      this.bs.DismissLoader();
-      localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
+      this.alert.showToast('Please enter proper value.', 'top', 2000);
     }
   }
 }
