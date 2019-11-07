@@ -54,6 +54,8 @@ export class CheckOtpPage {
           self.bs.hitApi('post', 'check-otp', data).subscribe((receivedData: any) => {
             self.bs.DismissLoader();
             if (receivedData.status) {
+              this.bs.token = receivedData.data.access_token;
+              this.bs.userId = receivedData.data.user_id;
               self.bs.setUserData(receivedData.data);
               if (self.userExist == true) {
                 self.navCtrl.navigateRoot(['my-calendar']);
@@ -65,7 +67,7 @@ export class CheckOtpPage {
                 });
               }
               localStorage.phoneNo = self.mobileNo;
-              localStorage.userID = receivedData.data.user_id
+              localStorage.userID = receivedData.data.user_id;
             }
           }, error => {
             self.bs.DismissLoader();

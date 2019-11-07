@@ -9,6 +9,7 @@ import { Base64 } from '@ionic-native/base64/ngx';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertModule } from '../../Module/alert/alert.module';
 import { BasicService } from 'src/app/service/Basic/basic.service';
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -32,33 +33,33 @@ export class ProfilePage {
     public route: ActivatedRoute,
     public alert: AlertModule,
     public navCtrl: NavController,
-    public bs: BasicService
+    public bs: BasicService,
+    public storage: Storage
   ) {
     this.profileForm = this.formBuilder.group({
-      profileId: '',
-      cno: '',
-      fname: ['', Validators.required],
-      mname: ['', Validators.required],
-      lname: ['', Validators.required],
+      profile_pic: '',
+      phone_no: '',
+      first_name: ['', Validators.required],
+      middle_name: ['', Validators.required],
+      sur_name: ['', Validators.required],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
-      mail: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       address: ['', Validators.required],
-      suburbLists: ['', Validators.required],
-      area: ['', Validators.required],
-      pinCode: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
-      motherName: '',
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+      pin_code: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
+      // motherName: '',
       // siblings: '',
     });
     this.route.queryParams.subscribe(params => {
       console.log(params);
-      if (params.data) {
-        this.profileForm.patchValue(params.data);
-      } else if (params.cno) {
+      if (params.cno) {
         this.profileForm.patchValue(params.cno);
       } else {
-        const userData = localStorage.getItem('userData');
-        this.profileForm.patchValue(JSON.parse(userData));
+        this.storage.get('userData').then(data => {
+          this.profileForm.patchValue(data);
+        });
       }
     });
   }
@@ -162,21 +163,26 @@ export class ProfilePage {
 
   profileFormSubmit(val: any) {
     val.value.profileId = this.userImage;
-    if (this.phno) {
+    console.log('User value => ', val.value);
+    if (val.value) {
       const storeData = [{
         phoneNumber: this.phno,
         userDetails: val.value
       }];
       // this.alert.showToast('Your profile update successfully.', 'top', 5000);
-      const data = {
-        user_id: localStorage.userID
-      }
+      const uservalue = val.value;
+      const userId = {
+        user_id: this.bs.userId
+      };
+      const data = Object.assign(uservalue, userId);
+      console.log('Hit api update profile data => ', data);
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
         console.log(receivedData);
         // if (receivedData.status) {
         //   this.bs.setUserData(receivedData.data);
         //   this.navCtrl.navigateRoot('my-calendar');
         // }
+        this.navCtrl.navigateRoot('my-calendar');
       }, error => {
         console.log(error);
       });
@@ -184,6 +190,5 @@ export class ProfilePage {
       localStorage.setItem('userData', JSON.stringify(this.profileForm.value));
     }
     // console.log(val.value);
-    this.navCtrl.navigateRoot('my-calendar');
   }
 }

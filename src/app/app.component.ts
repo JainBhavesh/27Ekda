@@ -30,7 +30,7 @@ export class AppComponent {
       title: 'Donors',
       url: '/donors',
       icon: 'wallet'
-    },{
+    }, {
       title: 'News',
       url: '/news-list',
       icon: 'wallet'
@@ -101,6 +101,7 @@ export class AppComponent {
       localStorage.removeItem('phoneNo');
       localStorage.removeItem('userID');
       this.storage.remove('userData');
+      this.bs.token = '27ekda_auth';
     });
   }
 
