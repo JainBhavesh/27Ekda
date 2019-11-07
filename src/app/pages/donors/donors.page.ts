@@ -80,17 +80,15 @@ export class DonorsPage {
     const data = {
       user_id: this.bs.userId
     }
-    this.bs.hitApi(
+    this.bs.hitApi('post',
       'user/donor-list',
       data,
-      'POST',
-      true
-    ).then((receivedData: any) => {
-      if (receivedData.status) {
-        this.donorData = receivedData.data.donorList;
-      } else {
-        //clear userdata or logout forcefully
-      }
-    }).catch(e => console.log('Error => ', e));
+    ).subscribe((receivedData: any) => {
+      console.log(receivedData);
+      // if (receivedData.status) {
+      //   this.donorData = receivedData.data.donorList;
+      // } else {
+      // }
+    });
   }
 }

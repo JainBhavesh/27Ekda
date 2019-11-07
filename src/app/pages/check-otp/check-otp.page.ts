@@ -48,24 +48,22 @@ export class CheckOtpPage {
           device_type: this.bs.deviceType,
           device_token: this.bs.deviceToken
         }
-        this.bs.hitApi(
+        this.bs.hitApi('post',
           'user/check-otp',
           data,
-          'POST',
-          true
-        ).then((receivedData: any) => {
-          if (receivedData.status) {
-            this.bs.setUserData(receivedData.data);
-            if (this.userExist == true) {
-              self.navCtrl.navigateRoot('my-calendar');
-            } else {
-              self.navCtrl.navigateRoot('profile', {
-                queryParams: {
-                  cno: { cno: localStorage.phoneNo }
-                }
-              });
-            }
-          }
+        ).subscribe((receivedData: any) => {
+          // if (receivedData.status) {
+          //   this.bs.setUserData(receivedData.data);
+          //   if (this.userExist == true) {
+          //     self.navCtrl.navigateRoot('my-calendar');
+          //   } else {
+          //     self.navCtrl.navigateRoot('profile', {
+          //       queryParams: {
+          //         cno: { cno: localStorage.phoneNo }
+          //       }
+          //     });
+          //   }
+          // }
         });
       } else {
         self.alert.openAlert('Ekda', 'Please enter valid OTP', 'OK').then(() => {

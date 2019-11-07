@@ -170,16 +170,17 @@ export class ProfilePage {
       const data = {
         user_id: this.bs.userId,
       }
-      this.bs.hitApi(
+      this.bs.hitApi('post',
         'user/update-profile',
-        data,
-        'POST',
-        true
-      ).then((receivedData: any) => {
-        if (receivedData.status) {
-          this.bs.setUserData(receivedData.data);
-          this.navCtrl.navigateRoot('my-calendar');
-        }
+        data
+      ).subscribe((receivedData: any) => {
+        console.log(receivedData);
+        // if (receivedData.status) {
+        //   this.bs.setUserData(receivedData.data);
+        //   this.navCtrl.navigateRoot('my-calendar');
+        // }
+      }, error => {
+        console.log(error);
       });
     } else {
       localStorage.setItem('userData', JSON.stringify(this.profileForm.value));

@@ -38,19 +38,15 @@ export class LoginPage {
     const data = {
       phone_no: this.loginForm.value.phone
     };
-    this.bs.hitApi(
-      'register',
-      data,
-      'POST',
-      true)
-      .then((receivedData: any) => {
-        if (receivedData.status) {
-          this.navCtrl.navigateForward('check-otp', {
-            queryParams: {
-              data: receivedData.data
-            }
-          });
-        }
+    this.bs.hitApi('post','register',data).subscribe((receivedData: any) => {
+        // if (receivedData.status) {
+        //   this.navCtrl.navigateForward('check-otp', {
+        //     queryParams: {
+        //       data: receivedData.data
+        //     }
+        //   });
+        // }
+        console.log(receivedData);
       });
   }
 }
