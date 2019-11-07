@@ -18,8 +18,8 @@
             <ion-item>
                 <ion-label>Gender</ion-label>
                 <ion-select placeholder="Select Gender" okText="Select" cancelText="Dismiss" name="gender" mode="ios" [(ngModel)]="filterSelectedData.gender">
-                    <ion-select-option value="female">Female</ion-select-option>
-                    <ion-select-option value="male">Male</ion-select-option>
+                    <ion-select-option value="F">Female</ion-select-option>
+                    <ion-select-option value="M">Male</ion-select-option>
                 </ion-select>
             </ion-item>
         </ion-col>
@@ -38,7 +38,7 @@
         </ion-col>
 
         <ion-col size="12" class="ion-text-center">
-            <ion-button shape="round">Filter Users</ion-button>
+            <ion-button shape="round" (click)="filterUserList()">Filter Users</ion-button>
         </ion-col>
     </ion-row>
     <ion-item>
@@ -49,7 +49,7 @@
         <ion-icon *ngIf="searchKey != ''" (click)="closeSearch()" class="icon-style" slot="end" color="primary" name="close">
         </ion-icon>
     </ion-item>
-    <ion-list>
+    <ion-list *ngIf="userData?.length != 0; else nodataFound">
         <ion-card *ngFor="let list of userData">
             <ion-item lines=none (click)="profile(list)" *ngIf="list?.first_name != null && list?.sur_name != null">
                 <ion-avatar slot="start">
@@ -64,4 +64,13 @@
             </ion-item>
         </ion-card>
     </ion-list>
+    <ng-template #nodataFound>
+        <ion-list>
+            <ion-card class="ion-text-center">
+                <ion-item lines="none">
+                    No users found
+                </ion-item>
+            </ion-card>
+        </ion-list>
+    </ng-template>
 </ion-content>

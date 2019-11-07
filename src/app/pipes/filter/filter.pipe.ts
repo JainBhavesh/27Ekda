@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(items: any[], field: string, value: string): any[] {
-    if (!items || !value || !field) {
+  transform(items: any[], value: string): any[] {
+    if (!items || !value) {
       return items;
     }
     return items.filter(
-      it => it[field].toLowerCase().indexOf(value.toLowerCase()) !== -1
+      it => it.first_name.toLowerCase().indexOf(value.toLowerCase()) !== -1
     );
   }
 
