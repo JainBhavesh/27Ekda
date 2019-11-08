@@ -22,10 +22,10 @@
             </ion-label>
             <ion-label>
                 <h2 class="font-black">
-                    {{userData.first_name}} {{userData.middle_name}} {{userData.sur_name}}
+                    {{userData?.first_name}} {{userData?.middle_name}} {{userData?.sur_name}}
                 </h2>
                 <h2>
-                    {{userData.phone_no}}
+                    {{userData?.phone}}
                 </h2>
                 <h2>
                     {{userData.email}}
@@ -63,9 +63,6 @@
                 </h2>
                 <h2>
                     DOB: {{userData.dob | date: 'dd/MM/yyyy'}}
-                </h2>
-                <h2>
-                    Mother Name: {{userData.motherName}}
                 </h2>
             </ion-label>
         </ion-card>

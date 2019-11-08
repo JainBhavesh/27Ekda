@@ -53,7 +53,7 @@
         <ion-card *ngFor="let list of userData">
             <ion-item lines=none (click)="profile(list)" *ngIf="list?.first_name != null && list?.sur_name != null">
                 <ion-avatar slot="start">
-                    <img [src]="list?.profile_pic == null ? '../../../assets/img/user.png' : list?.profile_pic" />
+                    <img [src]="list?.image == null ? '../../../assets/img/user.png' : list?.image" />
                 </ion-avatar>
                 <ion-label>
                     <h2 class="fc-blue">{{list?.first_name}} {{list?.middle_name}} {{list?.sur_name}}</h2>
