@@ -30,11 +30,18 @@ export class AppComponent {
       title: 'Donors',
       url: '/donors',
       icon: 'wallet'
-    }, {
+    },
+    {
+      title: 'Advertisement',
+      url: '/advertisement',
+      icon: 'at'
+    },
+    {
       title: 'News',
       url: '/news-list',
       icon: 'pricetag'
-    },{
+    },
+    {
       title: 'Feedback',
       url: '/feedback',
       icon: 'create'

@@ -51,8 +51,12 @@ export class ProfilePage {
       city: ['', Validators.required],
       country: ['', Validators.required],
       pin_code: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
-      // motherName: '',
-      // siblings: '',
+      education: [''],
+      occupation: [''],
+      marital_status: ['', Validators.required],
+      phone_home: ['', Validators.required],
+      phone_office: ['', Validators.required],
+      phone_other: ['', Validators.required],
     });
     this.route.queryParams.subscribe(params => {
       console.log(params);
@@ -166,6 +170,8 @@ export class ProfilePage {
   profileFormSubmit(val: any) {
     this.bs.showLoader();
     val.value.profileId = this.userImage;
+    // tslint:disable-next-line: radix
+    val.value.phone_no = Number(val.value.phone_no);
     if (val.value) {
       // this.alert.showToast('Your profile update successfully.', 'top', 5000);
       const uservalue = val.value;

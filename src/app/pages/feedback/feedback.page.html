@@ -9,19 +9,37 @@
 
 <ion-content>
     <ion-item class="textbox-style">
-        <ion-input type=text disabled="true" [(ngModel)]="name" class="font-white" rows="6" placeholder="Type your feedback here...">
-        </ion-input>
+        <ion-label class="font-black">{{name}}</ion-label>
+        <!-- <ion-input type=text disabled="true" [(ngModel)]="name"
+            class="font-white" rows="6" placeholder="Type your feedback
+            here...">
+        </ion-input> -->
     </ion-item>
     <ion-item class="textbox-style">
-        <ion-input type=text disabled="true" [(ngModel)]="mobileNo" class="font-white" rows="6" placeholder="Type your feedback here...">
-        </ion-input>
+        <ion-label class="font-black">{{mobileNo}}</ion-label>
+        <!-- <ion-input type=text disabled="true" [(ngModel)]="mobileNo"
+            class="font-white" rows="6" placeholder="Type your feedback
+            here...">
+        </ion-input> -->
     </ion-item>
     <ion-item class="textbox-style">
-        <ion-textarea [(ngModel)]="feedback" class="font-white" rows="6" placeholder="Type your feedback here...">
+        <ion-textarea [(ngModel)]="feedback" class="font-white" rows="6"
+            placeholder="Type your feedback here...">
         </ion-textarea>
     </ion-item>
 
     <div class="ion-margin-top ion-text-center">
         <ion-button expand=block (click)="submit()">Submit</ion-button>
+
+        <img src='../../../assets/img/comLogo.png' width="100" height="100" />
     </div>
+
+    <ion-label>
+        <h2 class="ion-padding">
+            For Technical Support: Phoenixtechinfo<br />
+            Email Id: support@phoenixtechinfo.com<br />
+            Mobile No.: +91 903 330 38178<br />
+            Name: Bhavik J Mehta<br />
+        </h2>
+    </ion-label>
 </ion-content>
