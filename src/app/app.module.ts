@@ -10,7 +10,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { Crop } from '@ionic-native/crop/ngx';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
-import { Contacts } from '@ionic-native/contacts/ngx';
+// import { Contacts } from '@ionic-native/contacts/ngx';
 import { Base64 } from '@ionic-native/base64/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -50,7 +50,7 @@ import { PipesModule } from './pipes/pipes.module';
     AppVersion,
     Camera,
     Crop,
-    Contacts,
+    // Contacts,
     Base64,
     // Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
