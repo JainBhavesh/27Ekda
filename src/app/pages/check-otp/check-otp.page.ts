@@ -96,4 +96,30 @@ export class CheckOtpPage {
       return 0;
     }
   }
+
+  resendCode() {
+    try {
+      this.bs.showLoader();
+      const data = {
+        phone_no: this.mobileNo
+      }
+      this.bs.hitApi('post', 'resend-otp', data).subscribe((receivedData: any) => {
+        this.bs.DismissLoader();
+        if (receivedData.status) {
+          this.otp = receivedData.data.otp;
+          this.alert.openAlert('Ekda', receivedData.msg, 'OK');
+        } else {
+          this.alert.openAlert('Ekda', 'Opps something wrong..', 'OK');
+        }
+      }, error => {
+        this.bs.DismissLoader();
+        console.log(error);
+        this.alert.openAlert('Ekda', 'Error from server side..', 'OK');
+      });
+    } catch (error) {
+      this.bs.DismissLoader();
+      console.log(error);
+      this.alert.openAlert('Ekda', 'Error from server side..', 'OK');
+    }
+  }
 }
