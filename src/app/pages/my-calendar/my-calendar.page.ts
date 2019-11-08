@@ -66,7 +66,7 @@ export class MyCalendarPage {
   }
 
   profile(list: any) {
-    this.navCtrl.navigateForward(['/contact-profile'], {
+    this.navCtrl.navigateForward('contact-profile', {
       queryParams: {
         data: list
       }
