@@ -43,6 +43,6 @@ export class NewsListPage {
         news: detail
       }
     };
-    this.router.navigate(['news-list-detail-page'], navigationExtras);
+    this.router.navigate(['/news-list-detail-page'], navigationExtras);
   }
 }

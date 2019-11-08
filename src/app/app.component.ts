@@ -42,9 +42,9 @@ export class AppComponent {
   ];
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
+    public platform: Platform,
+    public splashScreen: SplashScreen,
+    public statusBar: StatusBar,
     public router: Router,
     public alertModule: AlertModule,
     public navCtrl: NavController,
@@ -58,15 +58,15 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
-      this.bs.getUserData();
+      this.splashScreen.hide();
       this.storage.get('userData').then(data => {
         if (data != null) {
-          this.navCtrl.navigateRoot('my-calendar');
+          this.navCtrl.navigateRoot(['/my-calendar']);
         } else {
-          this.navCtrl.navigateRoot('login');
+          this.navCtrl.navigateRoot(['/login']);
         }
       });
-      this.splashScreen.hide();
+      this.bs.getUserData();
       this.handleHardwareBackButton();
       // this.pushNotifictions();
     });

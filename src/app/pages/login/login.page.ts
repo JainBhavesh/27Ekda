@@ -44,10 +44,10 @@ export class LoginPage {
               user: receivedData.data
             }
           };
-          this.router.navigate(['check-otp'], navigationExtras);
+          this.router.navigate(['/check-otp'], navigationExtras);
         } else {
           if (receivedData.data.is_user_exist) {
-            this.navCtrl.navigateRoot(['my-calendar']);
+            this.navCtrl.navigateRoot(['/my-calendar']);
           }
         }
       });

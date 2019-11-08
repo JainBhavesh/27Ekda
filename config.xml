@@ -18,7 +18,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="true" />
-    <preference name="StatusBarBackgroundColor" value="#ffffff" />
+    <preference name="StatusBarBackgroundColor" value="#0072ff" />
     <preference name="KeyboardResize" value="true" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
@@ -107,5 +107,4 @@
     <plugin name="cordova-plugin-camera" spec="4.0.3" />
     <plugin name="cordova-plugin-crop" spec="0.4.0" />
     <plugin name="com-badrit-base64" spec="0.2.0" />
-    <engine name="android" spec="~8.1.0" />
 </widget>

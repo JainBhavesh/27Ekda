@@ -97,8 +97,6 @@
       "cordova-plugin-crop": {},
       "com-badrit-base64": {}
     },
-    "platforms": [
-      "android"
-    ]
+    "platforms": []
   }
 }

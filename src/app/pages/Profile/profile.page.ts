@@ -174,7 +174,7 @@ export class ProfilePage {
       this.bs.hitApi('post', 'user/update-profile', data).subscribe((receivedData: any) => {
         this.bs.setUserData(receivedData.data);
         this.alert.showToast('Your profile update successfully.', 'top', 2000);
-        this.navCtrl.navigateRoot('my-calendar');
+        this.navCtrl.navigateRoot(['/my-calendar']);
       }, error => {
         this.bs.DismissLoader();
         console.log(error);

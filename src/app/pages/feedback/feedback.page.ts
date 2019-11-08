@@ -30,7 +30,7 @@ export class FeedbackPage {
         this.bs.DismissLoader();
         if (response.status) {
           this.alert.openAlert('Ekda', response.msg, 'OK').then(() => {
-            this.navCtrl.navigateRoot(['my-calendar']);
+            this.navCtrl.navigateRoot(['/my-calendar']);
           });
         } else {
           this.alert.openAlert('Ekda', 'Opps something wrong..', 'OK');

@@ -58,7 +58,7 @@ export class CheckOtpPage {
               this.bs.userId = receivedData.data.user_id;
               self.bs.setUserData(receivedData.data);
               if (self.userExist == true) {
-                self.navCtrl.navigateRoot(['my-calendar']);
+                self.navCtrl.navigateRoot(['/my-calendar']);
               } else {
                 self.navCtrl.navigateRoot('profile', {
                   queryParams: {
