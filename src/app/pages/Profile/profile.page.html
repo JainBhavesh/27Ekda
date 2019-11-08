@@ -11,7 +11,7 @@
     <ion-card class="ImageCard" no-margin>
         <ion-row>
             <ion-col text-center size="12">
-                <img class="propicImg" [src]="userImage" />
+                <img class="propicImg" [src]="_DomSanitizer.bypassSecurityTrustUrl(userImage)" />
             </ion-col>
             <ion-col text-center size="12">
                 <ion-text color="light" (click)="showactionSheet()"> Change Profile Photo</ion-text>

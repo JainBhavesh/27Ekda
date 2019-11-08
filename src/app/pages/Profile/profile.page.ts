@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertModule } from '../../Module/alert/alert.module';
 import { BasicService } from 'src/app/service/Basic/basic.service';
 import { Storage } from '@ionic/storage';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -34,7 +35,8 @@ export class ProfilePage {
     public alert: AlertModule,
     public navCtrl: NavController,
     public bs: BasicService,
-    public storage: Storage
+    public storage: Storage,
+    public _DomSanitizer: DomSanitizer
   ) {
     this.profileForm = this.formBuilder.group({
       profile_pic: '',
