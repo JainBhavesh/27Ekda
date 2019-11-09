@@ -39,6 +39,7 @@ export class MyCalendarPage {
   }
 
   ionViewWillEnter() {
+    this.menuCtrl.enable(true);
     this.dummy = this.userData;
   }
 

@@ -44,25 +44,23 @@
     <ion-item>
         <ion-input [(ngModel)]="searchKey" type="text" id="search" placeholder="Search By Name" (keyup.enter)="searchProduct(searchKey)">
         </ion-input>
-        <!-- <ion-icon (click)="searchProduct(searchKey)" class="icon-style" slot="end" color="primary" name="search">
-        </ion-icon>
-        <ion-icon *ngIf="searchKey != ''" (click)="closeSearch()" class="icon-style" slot="end" color="primary" name="close">
-        </ion-icon> -->
     </ion-item>
     <ion-list *ngIf="userData?.length != 0; else nodataFound">
-        <ion-card *ngFor="let list of userData | filter: 'full_name':searchKey">
-            <ion-item lines=none (click)="profile(list)" *ngIf="list?.first_name != null && list?.sur_name != null">
-                <ion-avatar slot="start">
-                    <img [src]="list?.image == null ? '../../../assets/img/user.png' : list?.image" />
-                </ion-avatar>
-                <ion-label>
-                    <h2 class="fc-blue">{{list?.first_name}} {{list?.middle_name}} {{list?.sur_name}}</h2>
-                    <p><strong>{{list?.phone}}</strong></p>
-                    <h3 class="fc-black">{{list?.address}}</h3>
-                    <p class="fc-black">{{list?.city}} {{list?.state}} , {{list?.country}}</p>
-                </ion-label>
-            </ion-item>
-        </ion-card>
+        <div *ngFor="let list of userData | filter: 'full_name':searchKey">
+            <ion-card *ngIf="list?.first_name != null && list?.sur_name != null">
+                <ion-item lines=none (click)="profile(list)">
+                    <ion-avatar slot="start">
+                        <img [src]="list?.image == null ? '../../../assets/img/user.png' : list?.image" />
+                    </ion-avatar>
+                    <ion-label>
+                        <h2 class="fc-blue">{{list?.full_name}}</h2>
+                        <p><strong>{{list?.phone}}</strong></p>
+                        <h3 class="fc-black">{{list?.address}}</h3>
+                        <p class="fc-black">{{list?.city}} {{list?.state}} , {{list?.country}}</p>
+                    </ion-label>
+                </ion-item>
+            </ion-card>
+        </div>
     </ion-list>
     <ng-template #nodataFound>
         <ion-list>

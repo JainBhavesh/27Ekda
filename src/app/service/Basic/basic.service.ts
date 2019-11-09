@@ -29,6 +29,13 @@ export class BasicService {
   county: any = 'India';
   email: any;
   profilePic: any;
+  education: any;
+  marital_status: any;
+  occupation: any;
+  phone_home: any;
+  phone_office: any;
+  phone_other: any;
+
   constructor(
     public http: HttpClient,
     public loadingCtrl: LoadingController,
@@ -107,6 +114,12 @@ export class BasicService {
     this.county = data.county;
     this.pincode = data.pin_code;
     this.profilePic = data.profile_pic;
+    this.education = data.education;
+    this.marital_status = data.marital_status;
+    this.occupation = data.occupation;
+    this.phone_home = data.phone_home;
+    this.phone_office = data.phone_office;
+    this.phone_other = data.phone_other;
   }
 
   async getUserData() {
@@ -127,6 +140,12 @@ export class BasicService {
         this.county = data.county;
         this.pincode = data.pin_code;
         this.profilePic = data.profile_pic;
+        this.education = data.education;
+        this.marital_status = data.marital_status;
+        this.occupation = data.occupation;
+        this.phone_home = data.phone_home;
+        this.phone_office = data.phone_office;
+        this.phone_other = data.phone_other;
       }
     });
   }

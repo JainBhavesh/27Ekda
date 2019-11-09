@@ -28,7 +28,7 @@
                     {{userData?.phone}}
                 </h2>
                 <h2>
-                    {{userData.email}}
+                    {{userData?.email}}
                 </h2>
             </ion-label>
         </ion-card>
@@ -39,16 +39,16 @@
             </ion-label>
             <ion-label>
                 <h2 class="font-black">
-                    {{userData.address}},
+                    {{userData?.address}},
                 </h2>
                 <h2>
-                    {{userData.city}},
+                    {{userData?.city}},
                 </h2>
                 <h2>
-                    {{userData.country}}
+                    {{userData?.country}}
                 </h2>
                 <h3>
-                    {{userData.pin_code}}
+                    {{userData?.pin_code}}
                 </h3>
             </ion-label>
         </ion-card>
@@ -59,10 +59,10 @@
             </ion-label>
             <ion-label>
                 <h2 class="font-black">
-                    {{userData.first_name}} {{userData.middle_name}} {{userData.sur_name}}
+                    {{userData?.full_name}}
                 </h2>
                 <h2>
-                    DOB: {{userData.dob | date: 'DD/MM/YYYY'}}
+                    DOB: {{userData?.dob}}
                 </h2>
             </ion-label>
         </ion-card>

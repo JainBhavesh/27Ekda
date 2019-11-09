@@ -1,8 +1,7 @@
 import { LoaderModule } from '../../Module/loader/loader.module';
 import { Component } from '@angular/core';
-import { ActionSheetController, NavController } from '@ionic/angular';
+import { ActionSheetController, NavController, Events } from '@ionic/angular';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { HttpClient } from '@angular/common/http';
 import { Crop } from '@ionic-native/crop/ngx';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Base64 } from '@ionic-native/base64/ngx';
@@ -25,7 +24,6 @@ export class ProfilePage {
   constructor(
     public actionSheetController: ActionSheetController,
     public camera: Camera,
-    public http: HttpClient,
     public crop: Crop,
     public formBuilder: FormBuilder,
     public loader: LoaderModule,
@@ -36,7 +34,8 @@ export class ProfilePage {
     public navCtrl: NavController,
     public bs: BasicService,
     public storage: Storage,
-    public _DomSanitizer: DomSanitizer
+    public _DomSanitizer: DomSanitizer,
+    public event: Events
   ) {
     this.profileForm = this.formBuilder.group({
       profile_pic: '',
@@ -65,13 +64,14 @@ export class ProfilePage {
       } else {
         this.storage.get('userData').then(data => {
           this.profileForm.patchValue(data);
+          this.userImage = data.profile_pic;
         });
       }
     });
   }
 
   ionViewWillEnter() {
-    this.userImage = '../../../../assets/img/user.png';
+    
   }
 
 
@@ -183,6 +183,7 @@ export class ProfilePage {
         this.bs.setUserData(receivedData.data);
         this.alert.showToast('Your profile update successfully.', 'top', 2000);
         this.navCtrl.navigateRoot(['/my-calendar']);
+        this.event.publish('setUserData')
       }, error => {
         this.bs.DismissLoader();
         console.log(error);

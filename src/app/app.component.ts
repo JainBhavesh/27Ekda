@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, NavController } from '@ionic/angular';
+import { Platform, NavController, Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
@@ -57,9 +57,14 @@ export class AppComponent {
     public navCtrl: NavController,
     // private push: Push,
     public bs: BasicService,
-    public storage: Storage
+    public storage: Storage,
+    public event: Events
   ) {
     this.initializeApp();
+    this.event.unsubscribe('setUserData');
+    this.event.subscribe('setUserData', () => {
+      this.setUserData();
+    });
   }
 
   initializeApp() {
@@ -76,6 +81,7 @@ export class AppComponent {
       this.bs.getUserData();
       this.handleHardwareBackButton();
       // this.pushNotifictions();
+      this.setUserData();
     });
   }
 
@@ -116,6 +122,11 @@ export class AppComponent {
     });
   }
 
+  setUserData() {
+    this.storage.get('userData').then(data => {
+      this.userData = data;
+    });
+  }
   // pushNotifictions() {
   //   const options: PushOptions = {
   //     android: {
